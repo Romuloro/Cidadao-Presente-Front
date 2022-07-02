@@ -1,13 +1,23 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 import { FormLogin } from "./style";
 
+import { useTransition, animated, config } from "react-spring";
+
+import cidade from "./cidade.gif";
+
+
 const Login = () => {
+
   return (
     <FormLogin>
       <div className="login">
         <div className="imageGood">
-          <h1>Imagem</h1>
+          <img src={cidade} alt="cidade gif"></img>
+          <div>
+            <h1>Cidadão Presente</h1>
+            <h1>Mobilização Social</h1>
+          </div>
         </div>
         <div className="container">
           <div className="text">
@@ -25,8 +35,12 @@ const Login = () => {
                 name="password"
               />
             </div>
-            <div>
-              <bottom type="submit"> Login </bottom>
+            <div className="button-container">
+              <button className="button" type="submit"> Login </button>
+              <div>
+                <h1>don't have an account?</h1>
+                <h2>sing-up</h2>
+              </div>
             </div>
           </form>
         </div>
