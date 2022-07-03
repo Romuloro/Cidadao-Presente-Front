@@ -177,6 +177,7 @@ export const FormLogin = styled.section`
   .button-container {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     button {
       background-color: #4caf50; /* Green */
       border: none;
@@ -194,6 +195,7 @@ export const FormLogin = styled.section`
     }
 
     .button {
+      height: 65%;
       background-color: black;
       color: white;
       border: 2px solid #4caf50;
@@ -203,10 +205,15 @@ export const FormLogin = styled.section`
         color: white;
       }
     }
+  }
 
+  .singupText {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
     h1,
     h2 {
-      font-size: 18px;
+      font-size: 1rem;
     }
     h2 {
       color: #00ff00;

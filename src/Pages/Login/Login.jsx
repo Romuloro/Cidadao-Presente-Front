@@ -37,7 +37,7 @@ const Login = () => {
             </div>
             <div className="button-container">
               <button className="button" type="submit"> Login </button>
-              <div>
+              <div className="singupText">
                 <h1>don't have an account?</h1>
                 <h2>sing-up</h2>
               </div>
