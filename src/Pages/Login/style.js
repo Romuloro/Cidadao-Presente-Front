@@ -15,6 +15,8 @@ export const FormLogin = styled.section`
     display: flex;
     width: 100%;
     height: 100vh;
+    justify-content: space-around;
+    /* align-items: center; */
   }
 
   .imageGood {
@@ -133,7 +135,7 @@ export const FormLogin = styled.section`
     display: flex;
     flex-direction: column;
     width: 100%;
-    padding: 25vh;
+    padding: 2.5% 5%;
   }
 
   .text {
@@ -159,13 +161,17 @@ export const FormLogin = styled.section`
 
   .input {
     input {
-      width: 90%;
+      width: 100%;
       height: 100%;
       margin-bottom: 2rem;
-      background-color: #000000;
       box-sizing: border-box;
       border: none;
       border-bottom: 1px solid #00ff00;
+      color: #ffffff;
+      font-size: 1.5rem;
+      outline: none;
+      background: transparent;
+      position: relative;
 
       ::placeholder {
         padding-left: 15px;
