@@ -2,12 +2,12 @@ import React, { useEffect, useState } from "react";
 
 import { Link } from "./style";
 
-const SidebarLink = ({ text }) => {
+const SidebarLink = ({ text, Icon }) => {
   return (
     <Link>
-    <div className="link">
-      <h2>{text}</h2>
-    </div>
+      <div className="link">
+        <h2>{text}</h2>
+      </div>
     </Link>
   );
 }
