@@ -1,12 +1,11 @@
 import styled from "styled-components";
 
 export const HomeContainer = styled.section`
-  padding:0;
+  padding: 0;
   margin: 0;
   display: flex;
   height: 100vh;
   width: 100vw;
-
 `;
 
 export const PostContainer = styled.section`
@@ -36,6 +35,7 @@ export const PostContainer = styled.section`
       border: 1px solid black;
       display: flex;
       gap: 1rem;
+      margin-bottom: 3rem;
 
       .content-container {
         margin: 2rem;
