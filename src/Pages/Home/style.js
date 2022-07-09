@@ -23,6 +23,7 @@ export const PostContainer = styled.section`
     box-sizing: border-box;
     height: 100%;
     width: inherit;
+    overflow-y: scroll;
 
     h1 {
       font-size: 2.5rem;
@@ -57,11 +58,11 @@ export const PostContainer = styled.section`
         margin: 2rem 0;
       }
 
-      .tipo-container {
+      #tipo-container {
         display: flex;
         justify-content: flex-end;
 
-        spam {
+        span {
           margin: 0 1rem;
           font-size: 1.4rem;
           border-radius: 30px;
