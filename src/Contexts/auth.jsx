@@ -26,28 +26,20 @@ export const AuthProviders = ({ children }) => {
     try {
       const response = await getAuth(email, password);
       console.log(response.data);
-      console.log(document.cookie)
-      /* const cookie = response.get("token");
-      console.log(cookie); */
-      /* console.log(lingua); */
+      const token = document.cookie.split(";")[4].split("=")[1]
+      console.log(token)
 
-      /* if (response) {
-        const response_token = await getTokenValues(response.data.token);
-
-        const complet_name = `${response_token.data.name}_${response_token.data.last_name}`;
-
-        localStorage.setItem("user", complet_name);
-        localStorage.setItem("id", response_token.data.id);
-        localStorage.setItem("token", JSON.stringify(response.data.token));
-
+      if (response) {
+        localStorage.setItem("token", token);
+        localStorage.setItem("user", response.data.user)
         api.defaults.headers.Authorization = `bearer ${response.data.token}`;
         api.defaults.headers.common = {
           Authorization: `Bearer ${response.data.token}`,
         };
 
-        setUser(complet_name);
-        navigate(`/home/${lingua}?name=${complet_name}`);
-      } */
+        setUser(response.data.user);
+        navigate(`/home/`);
+      }
     } catch (error) {
       console.log(error);
     }
