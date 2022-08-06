@@ -5,33 +5,28 @@ import { HomeContainer, PostContainer } from "./style";
 import Avatar from "@mui/material/Avatar";
 import UIInfiniteScroll from "../../Components/InfiniteScroll/InfiniteScroll";
 
-import { api, getAllPost } from "../../api/api";
+import Post from "../../Components/Post/index";
 
-const postsTitles = [
-  "Rua não asfaltada",
-  "Muito Lixo na Rua",
-  "Transporte demora",
-  "Posto de saúde sem atendimento",
-  "Rua não asfaltada",
-  "Muito Lixo na Rua",
-  "Transporte demora",
-  "Posto de saúde sem atendimento",
-];
+import { api, getAllPost } from "../../api/api";
 
 const Home = () => {
   const [post, setPost] = useState([]);
+  const [allposts, setAllPosts] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [pick, setPick] = useState(false);
 
-  useEffect(async() => {
+  useEffect(async () => {
     const posts_data = await fetchData();
-    console.log(posts_data)
+    console.log(posts_data);
+    setAllPosts(posts_data);
+  }, []);
+
+  useEffect(() => {
     const perPage = 1;
-    const postPick = posts_data.slice(0, perPage * currentPage);
+    const postPick = allposts.slice(0, perPage * currentPage);
     console.log(postPick);
     setPost(postPick);
     setPick(true);
-    console.log(postsTitles.length);
   }, [currentPage]);
 
   const fetchMore = () => {
@@ -41,10 +36,10 @@ const Home = () => {
     setCurrentPage(newPage);
   };
 
-  const fetchData = async() => {
+  const fetchData = async () => {
     const data_post = await getAllPost();
     return data_post.data;
-  }
+  };
 
   return (
     <HomeContainer>
@@ -56,32 +51,12 @@ const Home = () => {
           <div className="post-container">
             <h1>Post</h1>
             {post.map((postTitle, index) => (
-              <div className="box-post">
-                <Avatar sx={{ width: 80, height: 80 }}>H</Avatar>
-                <div className="content-container">
-                  <h1 className="post-title">{postTitle.descricao}</h1>
-                  <h2 className="post-text">
-                    Mussum Ipsum, cacilds vidis litro abertis. Paisis, filhis,
-                    espiritis santis.Praesent malesuada urna nisi, quis volutpat
-                    erat hendrerit non. Nam vulputate dapibus.Aenean aliquam
-                    molestie leo, vitae iaculis nisl.In elementis mé pra quem é
-                    amistosis quis leo.
-                  </h2>
-                  <div id="tipo-container">
-                    <span>
-                      <h6>Tipo 1</h6>
-                    </span>
-                    <span>
-                      <h6>Tipo 1</h6>
-                    </span>
-                    <span>
-                      <h6>Tipo 1</h6>
-                    </span>
-                  </div>
-                </div>
-              </div>
+              <>
+                <Post postTitle={postTitle} />
+                
+              </>
             ))}
-            {pick && post.length < postsTitles.length && (
+            {pick && post.length < allposts.length && (
               <UIInfiniteScroll fetchMore={fetchMore} />
             )}
           </div>
