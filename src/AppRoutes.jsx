@@ -7,8 +7,7 @@ import Home from "./Pages/Home/Home";
 
 import { AuthProviders } from "./Contexts/auth";
 import Private from "./Contexts/private";
-/* import { AuthProviders, AuthContext } from "./contexts/auth.jsx";
- */
+
 export default function AppRoutes() {
   return (
     <BrowserRouter>

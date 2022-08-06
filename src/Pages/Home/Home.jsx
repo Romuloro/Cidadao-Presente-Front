@@ -5,6 +5,8 @@ import { HomeContainer, PostContainer } from "./style";
 import Avatar from "@mui/material/Avatar";
 import UIInfiniteScroll from "../../Components/InfiniteScroll/InfiniteScroll";
 
+import { api, getAllPost } from "../../api/api";
+
 const postsTitles = [
   "Rua não asfaltada",
   "Muito Lixo na Rua",
@@ -21,9 +23,11 @@ const Home = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [pick, setPick] = useState(false);
 
-  useEffect(() => {
-    const perPage = 2;
-    const postPick = postsTitles.slice(0, perPage * currentPage);
+  useEffect(async() => {
+    const posts_data = await fetchData();
+    console.log(posts_data)
+    const perPage = 1;
+    const postPick = posts_data.slice(0, perPage * currentPage);
     console.log(postPick);
     setPost(postPick);
     setPick(true);
@@ -36,6 +40,11 @@ const Home = () => {
     setPick(false);
     setCurrentPage(newPage);
   };
+
+  const fetchData = async() => {
+    const data_post = await getAllPost();
+    return data_post.data;
+  }
 
   return (
     <HomeContainer>
@@ -50,7 +59,7 @@ const Home = () => {
               <div className="box-post">
                 <Avatar sx={{ width: 80, height: 80 }}>H</Avatar>
                 <div className="content-container">
-                  <h1 className="post-title">{postTitle}</h1>
+                  <h1 className="post-title">{postTitle.descricao}</h1>
                   <h2 className="post-text">
                     Mussum Ipsum, cacilds vidis litro abertis. Paisis, filhis,
                     espiritis santis.Praesent malesuada urna nisi, quis volutpat

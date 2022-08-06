@@ -49,7 +49,6 @@ export const AuthProviders = ({ children }) => {
     console.log("vai ralar!");
     localStorage.removeItem("user");
     localStorage.removeItem("token");
-    localStorage.removeItem("id");
     api.defaults.headers.Authorization = null;
     setUser(null);
     setLoading(false);

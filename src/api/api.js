@@ -8,3 +8,7 @@ export const api = axios.create({
 export const getAuth = async (email, senha) => {
   return api.post("/cidadao/login", { email, senha });
 };
+
+export const getAllPost = async () => {
+  return api.get("/post/")
+}
