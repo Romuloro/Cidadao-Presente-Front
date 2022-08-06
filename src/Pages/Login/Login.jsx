@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 
 import { FormLogin } from "./style";
 
@@ -6,12 +6,26 @@ import { useTransition, animated, config } from "react-spring";
 
 import cidade from "./cidade.gif";
 
+import { AuthContext } from "../../Contexts/auth";
+
 const Login = () => {
+  const { authenticated, login } = useContext(AuthContext);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    try {
+      login(email, password);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <FormLogin>
       <div className="login">
-        <div className="container sing">
+        {/* <div className="container sing">
           <div className="text">
             <h1>Sign up</h1>
             <h2>Let's log you in quickly</h2>
@@ -70,7 +84,7 @@ const Login = () => {
               </div>
             </div>
           </form>
-        </div>
+        </div> */}
         {/* <div className="imageGood">
           <img src={cidade} alt="cidade gif"></img>
           <div>
@@ -83,15 +97,23 @@ const Login = () => {
             <h1>Login</h1>
             <h2>Let's log you in quickly</h2>
           </div>
-          <form className="form">
+          <form className="form" onSubmit={handleLogin}>
             <div className="input">
-              <input type="email" placeholder="Enter your email" name="email" />
+              <input
+                type="email"
+                placeholder="Enter your email"
+                name="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
             </div>
             <div className="input">
               <input
                 type="password"
                 placeholder="Enter your password"
                 name="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
               />
             </div>
             <div className="button-container">
