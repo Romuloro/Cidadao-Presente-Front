@@ -1,15 +1,14 @@
 import React, { useEffect, useState, useRef } from "react";
-import Sidebar from "../../Components/SideBar/Sidebar";
+
 import { HomeContainer, PostContainer } from "./style";
 
-import Avatar from "@mui/material/Avatar";
-import TextField from "@mui/material/TextField";
-
+import CreatedPost from "../../Components/CreatedPost/index"
 import UIInfiniteScroll from "../../Components/InfiniteScroll/InfiniteScroll";
-
 import Post from "../../Components/Post/index";
+import Sidebar from "../../Components/SideBar/Sidebar";
 
 import { api, getAllPost } from "../../api/api";
+
 
 const Home = () => {
   const [post, setPost] = useState([]);
@@ -51,16 +50,7 @@ const Home = () => {
       <div>
         <PostContainer>
           <div className="post-container">
-            <div className="post-create">
-              <h1>Post</h1>
-              <div>
-                <TextField
-                  id="outlined-basic"
-                  label="Qual é a sua demanda?"
-                  variant="outlined"
-                />
-              </div>
-            </div>
+            <CreatedPost/>
             {post.map((postTitle, index) => (
               <>
                 <Post postTitle={postTitle} />
