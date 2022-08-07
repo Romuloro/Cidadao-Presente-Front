@@ -25,12 +25,17 @@ export const PostContainer = styled.section`
     width: inherit;
     overflow-y: scroll;
 
-    h1 {
-      font-size: 2.5rem;
-      margin-left: 2rem;
+    .post-create {
+      border: 1px solid black;
+      height: 45%;
+
+      h1 {
+        font-size: 2.5rem;
+        margin-left: 2rem;
+      }
     }
 
-    .box-post {
+    /* .box-post {
       align-self: center;
       width: 70%;
       border: 1px solid black;
@@ -74,6 +79,6 @@ export const PostContainer = styled.section`
           justify-content: center;
         }
       }
-    }
+    } */
   }
 `;

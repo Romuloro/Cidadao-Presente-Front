@@ -3,6 +3,8 @@ import Sidebar from "../../Components/SideBar/Sidebar";
 import { HomeContainer, PostContainer } from "./style";
 
 import Avatar from "@mui/material/Avatar";
+import TextField from "@mui/material/TextField";
+
 import UIInfiniteScroll from "../../Components/InfiniteScroll/InfiniteScroll";
 
 import Post from "../../Components/Post/index";
@@ -49,11 +51,19 @@ const Home = () => {
       <div>
         <PostContainer>
           <div className="post-container">
-            <h1>Post</h1>
+            <div className="post-create">
+              <h1>Post</h1>
+              <div>
+                <TextField
+                  id="outlined-basic"
+                  label="Qual é a sua demanda?"
+                  variant="outlined"
+                />
+              </div>
+            </div>
             {post.map((postTitle, index) => (
               <>
                 <Post postTitle={postTitle} />
-                
               </>
             ))}
             {pick && post.length < allposts.length && (
