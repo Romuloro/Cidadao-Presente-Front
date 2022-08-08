@@ -2,12 +2,13 @@ import React, { useEffect, useState, useRef } from "react";
 
 import { HomeContainer, PostContainer } from "./style";
 
-import CreatedPost from "../../Components/CreatedPost/index"
 import UIInfiniteScroll from "../../Components/InfiniteScroll/InfiniteScroll";
 import Post from "../../Components/Post/index";
 import Sidebar from "../../Components/SideBar/Sidebar";
 
 import { api, getAllPost } from "../../api/api";
+import Modal from "../../Components/Modal/modal";
+import CreatedPost from "../../Components/CreatedPost";
 
 
 const Home = () => {
@@ -15,6 +16,7 @@ const Home = () => {
   const [allposts, setAllPosts] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [pick, setPick] = useState(false);
+  const [isModalVisible, setIsModalVisible] = useState(false)
 
   useEffect(async () => {
     const posts_data = await fetchData();
@@ -50,7 +52,14 @@ const Home = () => {
       <div>
         <PostContainer>
           <div className="post-container">
-            <CreatedPost/>
+            <div>
+              <button onClick={() => setIsModalVisible(true)}> Open </button>
+              {isModalVisible ? (
+                <Modal onClose={() => setIsModalVisible(false)}>
+                  <CreatedPost />
+                </Modal>
+              ) : null}
+            </div>
             {post.map((postTitle, index) => (
               <>
                 <Post postTitle={postTitle} />

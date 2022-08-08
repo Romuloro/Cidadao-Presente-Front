@@ -64,7 +64,6 @@ const CreatedPost = () => {
   return (
     <CreatedPostContainer>
       <h1>Post</h1>
-      <div>
         <form>
           <TextField
             id="outlined-basic"
@@ -123,7 +122,6 @@ const CreatedPost = () => {
             ))}
           </Select>
         </form>
-      </div>
     </CreatedPostContainer>
   );
 };
