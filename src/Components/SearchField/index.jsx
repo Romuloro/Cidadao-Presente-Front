@@ -75,6 +75,9 @@ const SearchField = (props) => {
                   format: "json",
                   addressdetails: 1,
                   polygon_geojson: 0,
+                  limit: 2,
+                  acceptlanguage:"pt-br",
+                  countrycodes: "br",
                 };
                 const queryString = new URLSearchParams(params).toString();
                 const requestOptions = {
