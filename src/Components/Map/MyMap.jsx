@@ -9,10 +9,13 @@ import {
 } from "react-leaflet";
 
 import SearchField from "../SearchField";
+import TextField from "@mui/material/TextField";
 
 import "leaflet/dist/leaflet.css";
 import L from "leaflet";
 import placeIcon from "./images/placeholder.png";
+
+import { api, createLocalidade } from "../../api/api";
 
 const center = [-22.85754769972381, -43.017380878034544];
 
@@ -42,36 +45,59 @@ function ResetCenterView(props) {
   return null;
 }
 
+const MyMap = ({ selectPosition, postCoords }) => {
+  const [coords, setCoords] = useState("");
+  
+  // const { selectPosition } = props;
 
-const MyMap = (props) => {
-  const [coords, setCoords] = useState(null);
-  const { selectPosition } = props;
-
-  console.log(selectPosition);
+  console.log("select position", selectPosition);
   const locationSelection = [selectPosition?.lat, selectPosition?.lon];
 
+  useEffect(() => {
+    if (!coords) {
+      setCoords({ lat: center[0], lng: center[1] });
+      postCoords({ lat: center[0], lng: center[1] });
+    }
+  }, []);
+
+  /* const handleLocalidade = async (e) => {
+    e.preventDefault();
+    const nickName = localStorage.getItem("user");
+    try {
+      resultCreatedLocalidade = await createLocalidade(
+        coord,
+        descricao,
+        nickName
+      );
+    } catch (error) {
+      console.log(error);
+    }
+  }; */
+
   function MyComponent() {
-    //const [coords, setCoords] = useState(props);
     const map = useMapEvent("click", (e) => {
       setCoords({ lat: e.latlng.lat, lng: e.latlng.lng });
+      postCoords(coords);
     });
     let locationSelection;
-    if (!coords) {
+    if (!map) {
       locationSelection = [center[0], center[1]];
     } else {
       locationSelection = [coords?.lat, coords?.lng];
     }
-    
+
     return (
       <>
         {coords && (
-          <Marker position={locationSelection} icon={icon}>
-            <Popup>
-              <p>{`lat: ${coords.lat.toFixed(4)} lng: ${coords.lng.toFixed(
-                4
-              )}`}</p>
-            </Popup>
-          </Marker>
+          <>
+            <Marker position={locationSelection} icon={icon}>
+              <Popup>
+                <p>{`lat: ${coords.lat.toFixed(4)} lng: ${coords.lng.toFixed(
+                  4
+                )}`}</p>
+              </Popup>
+            </Marker>
+          </>
         )}
       </>
     );
@@ -96,12 +122,8 @@ const MyMap = (props) => {
           </Marker>
         )}
         <ResetCenterView selectPosition={selectPosition} />
-        <MyComponent coords={coords}/>
+        <MyComponent /* coords={coords} */ />
       </MapContainer>
-      {!coords? null : (
-        <h1>{`Latitude${coords.lat} Longitude: ${coords.lng}`}</h1>
-      )}
-      
     </>
   );
 };

@@ -19,6 +19,7 @@ export const ModalStyled = styled.section`
       width: 60%;
       height: 60%;
       border-radius: 20px;
+      //display:flex;
 
       .close {
         background-color: transparent;
@@ -32,6 +33,7 @@ export const ModalStyled = styled.section`
         position:relative;
         align-items: center;
         cursor: pointer;
+        z-index: 25;
 
         &:before,
         &:after {
@@ -48,37 +50,14 @@ export const ModalStyled = styled.section`
           transform: rotate(-45deg);
         }
       }
+      .content{
+        position: relative;
+        top: -7.5%;
+        width: 100%;
+        height: 100%;
+      }
     }
   }
 
-  form {
-    display: grid;
-    grid-template-rows: auto auto auto;
-    grid-template-columns: auto auto auto auto;
-    gap: 0.5rem;
-    grid-template-areas:
-      "titulo titulo titulo anonimo"
-      "descricao descricao descricao descricao"
-      "endereco endereco problemas problemas";
-
-    .problemas {
-      grid-area: problemas;
-    }
-
-    .anonimo {
-      grid-area: anonimo;
-    }
-
-    .endereco {
-      grid-area: endereco;
-    }
-
-    .titulo {
-      grid-area: titulo;
-    }
-
-    .descricao {
-      grid-area: descricao;
-    }
-  }
+  
 `;

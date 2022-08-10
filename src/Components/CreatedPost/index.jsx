@@ -14,6 +14,11 @@ import Chip from "@mui/material/Chip";
 
 import { CreatedPostContainer } from "./style";
 
+import { api, createLocalidade } from "../../api/api";
+
+import MyMap from "../Map/MyMap";
+import FormDialog from "../DialogLocalidade/dialog";
+
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
 const MenuProps = {
@@ -49,13 +54,21 @@ function getStyles(name, personName, theme) {
 
 const CreatedPost = () => {
   const theme = useTheme();
-  const [personName, setPersonName] = useState([]);
+  const [postTitle, setPostTitle] = useState("");
+  const [postDescription, setPostDescription] = useState("");
+  const [anonimo, setAnonimo] = useState(false);
+  const [problemasPost, setProblemasPost] = useState([]);
+  
+
+  const handlePost = async() =>{
+    console.log("a")
+  }
 
   const handleChange = (event) => {
     const {
       target: { value },
     } = event;
-    setPersonName(
+    setProblemasPost(
       // On autofill we get a stringified value.
       typeof value === "string" ? value.split(",") : value
     );
@@ -64,64 +77,71 @@ const CreatedPost = () => {
   return (
     <CreatedPostContainer>
       <h1>Post</h1>
-        <form>
-          <TextField
-            id="outlined-basic"
-            label="Qual é a sua demanda? Escreva aqui o título."
-            variant="outlined"
-            className="titulo"
-          />
-          <TextField
-            id="outlined-basic"
-            label="Descreva a sua demanda."
-            variant="outlined"
-            className="descricao"
-          />
+      <form onSubmit={handlePost}>
+        <TextField
+          id="outlined-basic"
+          label="Qual é a sua demanda? Escreva aqui o título."
+          variant="outlined"
+          className="titulo"
+          value={postTitle}
+          onChange={(e) => {
+            setPostTitle(e.target.value);
+          }}
+        />
+        <TextField
+          id="outlined-basic"
+          label="Descreva a sua demanda."
+          variant="outlined"
+          className="descricao"
+          value={postDescription}
+          onChange={() => {
+            setPostDescription(true);
+          }}
+        />
 
-          <TextField
-            id="outlined-basic"
-            label="Onde ocorre sua demanda? Digite o endereço"
-            variant="outlined"
-            className="endereco"
-          />
+        <FormControlLabel
+          control={<Checkbox />}
+          label="Anônimo"
+          className="anonimo"
+          value={anonimo}
+          onChange={() => {
+            setAnonimo(true);
+          }}
+        />
 
-          <FormControlLabel
-            control={<Checkbox defaultChecked />}
-            label="Anônimo"
-            className="anonimo"
-          />
-
-          <InputLabel id="demo-multiple-chip-label" className="problemas">
-            Problemas
-          </InputLabel>
-          <Select
-            labelId="demo-multiple-chip-label"
-            id="demo-multiple-chip"
-            className="problemas"
-            multiple
-            value={personName}
-            onChange={handleChange}
-            input={<OutlinedInput id="select-multiple-chip" label="Chip" />}
-            renderValue={(selected) => (
-              <Box sx={{ display: "flex", flexWrap: "wrap", gap: 0.5 }}>
-                {selected.map((value) => (
-                  <Chip key={value} label={value} />
-                ))}
-              </Box>
-            )}
-            MenuProps={MenuProps}
-          >
-            {names.map((name) => (
-              <MenuItem
-                key={name}
-                value={name}
-                style={getStyles(name, personName, theme)}
-              >
-                {name}
-              </MenuItem>
-            ))}
-          </Select>
-        </form>
+        <InputLabel id="demo-multiple-chip-label" className="problemas">
+          Problemas
+        </InputLabel>
+        <Select
+          labelId="demo-multiple-chip-label"
+          id="demo-multiple-chip"
+          className="problemas"
+          multiple
+          value={problemasPost}
+          onChange={handleChange}
+          input={<OutlinedInput id="select-multiple-chip" label="Chip" />}
+          renderValue={(selected) => (
+            <Box sx={{ display: "flex", flexWrap: "wrap", gap: 0.5 }}>
+              {selected.map((value) => (
+                <Chip key={value} label={value} />
+              ))}
+            </Box>
+          )}
+          MenuProps={MenuProps}
+        >
+          {names.map((name) => (
+            <MenuItem
+              key={name}
+              value={name}
+              style={getStyles(name, problemasPost, theme)}
+            >
+              {name}
+            </MenuItem>
+          ))}
+        </Select>
+        <button className="buttom_post" type="submit">Postar</button>
+        <FormDialog className="endereco" />
+      </form>
     </CreatedPostContainer>
   );
 };

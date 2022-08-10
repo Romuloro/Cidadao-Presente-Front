@@ -12,3 +12,13 @@ export const getAuth = async (email, senha) => {
 export const getAllPost = async () => {
   return api.get("/post/")
 }
+
+export const createLocalidade = async (coord, descricao, nickName) => {
+  const latitude = String(coord.lat);
+  const longitude = String(coord.lng);
+  return api.post(`/localidade/${nickName}`, {
+    latitude,
+    longitude,
+    descricao,
+  });
+}
