@@ -14,7 +14,7 @@ import Chip from "@mui/material/Chip";
 
 import { CreatedPostContainer } from "./style";
 
-import { api, createLocalidade } from "../../api/api";
+import { api, createPost } from "../../api/api";
 
 import MyMap from "../Map/MyMap";
 import FormDialog from "../DialogLocalidade/dialog";
@@ -56,12 +56,26 @@ const CreatedPost = () => {
   const theme = useTheme();
   const [postTitle, setPostTitle] = useState("");
   const [postDescription, setPostDescription] = useState("");
+  const [localidade_id, setLocalidadeId] = useState("");
+  const [cidadao_id, setCidadao_id] = useState("");
   const [anonimo, setAnonimo] = useState(false);
   const [problemasPost, setProblemasPost] = useState([]);
   
 
-  const handlePost = async() =>{
-    console.log("a")
+  const handlePost = async(e) =>{
+    e.preventDefault();
+    try {
+      const result = await createPost(
+        anonimo,
+        postDescription,
+        status,
+        localidade_id,
+        cidadao_id,
+        problemasPost
+      );
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   const handleChange = (event) => {
@@ -73,6 +87,11 @@ const CreatedPost = () => {
       typeof value === "string" ? value.split(",") : value
     );
   };
+
+  const pickLocalidadeId = (id) => {
+    console.log(id)
+    setLocalidadeId(id)
+  }
 
   return (
     <CreatedPostContainer>
@@ -139,8 +158,10 @@ const CreatedPost = () => {
             </MenuItem>
           ))}
         </Select>
-        <button className="buttom_post" type="submit">Postar</button>
-        <FormDialog className="endereco" />
+        <button className="buttom_post" type="submit">
+          Postar
+        </button>
+        <FormDialog pickLocalidadeId={pickLocalidadeId} className="endereco" />
       </form>
     </CreatedPostContainer>
   );

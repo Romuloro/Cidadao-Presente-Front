@@ -38,7 +38,7 @@ export const AuthProviders = ({ children }) => {
         };
 
         setUser(response.data.user);
-        navigate(`/home/`);
+        navigate(`/home`);
       }
     } catch (error) {
       console.log(error);

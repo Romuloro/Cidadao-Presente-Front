@@ -22,3 +22,14 @@ export const createLocalidade = async (coord, descricao, nickName) => {
     descricao,
   });
 }
+
+export const createPost = async (anomino, descricao, status, localidade_id, cidadao_id, problemas_) => {
+  return api.post("/post/", {
+    anomino,
+    descricao,
+    status,
+    localidade_id,
+    cidadao_id,
+    problemas_
+  });
+}

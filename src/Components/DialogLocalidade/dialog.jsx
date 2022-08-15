@@ -9,7 +9,9 @@ import DialogTitle from "@mui/material/DialogTitle";
 import MyMap from "../Map/MyMap";
 import { ModalLocalidadeStyled } from "./style";
 
-export default function FormDialog() {
+import { createLocalidade } from "../../api/api";
+
+export default function FormDialog({ pickLocalidadeId }) {
   const [open, setOpen] = React.useState(false);
   const [selectPosition, setSelectPosition] = useState(null);
   const [coordsData, setCoordsData] = useState(null);
@@ -29,12 +31,19 @@ export default function FormDialog() {
     setCoordsData(mapCoord);
     console.log("data", coordsData, "descrição", descricao);
     const nickName = localStorage.getItem("user");
+    
     /* try {
       const resultCreatedLocalidade = await createLocalidade(
         coordsData,
         descricao,
         nickName
       );
+
+      const getCidadaoId = await getCidadao()
+
+      const {id} = resultCreatedLocalidade.data
+      pickLocalidadeId(id);
+
     } catch (error) {
       console.log(error);
     } */
@@ -47,7 +56,7 @@ export default function FormDialog() {
       </Button>
 
       <Dialog className="modal-container" open={open} onClose={handleClose}>
-        <DialogTitle>Subscribe</DialogTitle>
+        <DialogTitle>Adicionar a Localização</DialogTitle>
         <DialogContent>
           <DialogContentText>
             Aqui você deve colocar a sua localidade
@@ -73,7 +82,7 @@ export default function FormDialog() {
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Cancel</Button>
-          <Button onClick={handleClose}>Subscribe</Button>
+          <Button onClick={handleClose}>OK</Button>
         </DialogActions>
       </Dialog>
     </div>
